@@ -23,6 +23,7 @@ export class MenuComponent implements OnInit {
     this.dishes = this.dishService.getDishes();
     
   }
+  
 
   constructor(private dishService : DishService){
 
@@ -32,6 +33,14 @@ export class MenuComponent implements OnInit {
   {
     console.log('test on select event');
     this.selectedDish = dish;
+  }
+
+  getDish(id: string): Dish {
+    return DISHES.filter((dish) => (dish.id === id))[0];
+  }
+
+  getFeaturedDish(): Dish {
+    return DISHES.filter((dish) => dish.featured)[0];
   }
 
    
