@@ -23,6 +23,10 @@ import { LoginComponent } from './login/login.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule, MatInputModule, MatCheckboxModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -46,11 +50,14 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatButtonModule,
     AppRoutingModule,
+    MatSelectModule,
+    MatSlideToggleModule,
     MatDialogModule,
     MatFormFieldModule, 
     MatInputModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents:[
     LoginComponent
