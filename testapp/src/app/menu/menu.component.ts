@@ -21,7 +21,6 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.dishService.getDishes().then((dishes) => this.dishes = dishes);
-    
   }
   
 
@@ -41,7 +40,5 @@ export class MenuComponent implements OnInit {
 
   getFeaturedDish(): Dish {
     return DISHES.filter((dish) => dish.featured)[0];
-  }
-
-   
+  }   
   }
