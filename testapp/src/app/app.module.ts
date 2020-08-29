@@ -27,8 +27,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { HttpClientModule } from '@angular/common/http';
-import { baseURL } from './shared/baseurl';
 
 
 @NgModule({
@@ -61,16 +59,14 @@ import { baseURL } from './shared/baseurl';
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule,
-    HttpClientModule
+    MatProgressSpinnerModule
   ],
   entryComponents:[
     LoginComponent
   ],
   providers: [DishService,
   PromotionService,
-  LeaderService,
-  {provide: 'BaseURL', useValue: baseURL}],
+  LeaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
