@@ -6,9 +6,7 @@
     fxLayoutGap="10px" 
     fxLayoutGap.xs="0">
 
-
-
-
+    
   <div fxFlex="40">
     <div fxFlex >
       <mat-card *ngIf="dish">
@@ -42,10 +40,33 @@
         </p>
         <p matLine> -- {{commentitem.author}} {{commentitem.date | date}}</p>
       </mat-list-item>
+
+      <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+        
+          <mat-form-field class="full-width">
+            <input matInput formControlName="author" placeholder="Name" type="text" required>
+            <mat-error *ngIf="feedbackForm.get('author').hasError('required') && feedbackForm.get('author').touched">author name is required</mat-error>
+          </mat-form-field>
+
+         
+          <mat-slider
+  thumbLabel
+  [displayWith]="formatLabel"
+  tickInterval="1"
+  min="1"
+  max="5"></mat-slider>
+
+  <mat-form-field class="full-width">
+    <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+  </mat-form-field>
+        
+      
+        <button
+        [disabled]="feedbackForm.invalid" type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+      </form>
     </mat-list>
     <div [hidden]="dish">
       <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
     </div>
   </div>
-
 </div>

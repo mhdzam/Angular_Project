@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     this.dishservice.getFeaturedDish().subscribe((dish) => this.dish = dish);
     this.promotionservice.getFeaturedPromotion().subscribe((featurePromotion) => this.promotion = featurePromotion);
     this.leaderservice.getFeaturedLeader().subscribe((featuerLeader) => this.leader = featuerLeader);
-    console.log(this.leader);
+  
   }
 
 }
