@@ -24,6 +24,7 @@ export class DishdetailComponent implements OnInit {
 color: ThemePalette;
   
   dish: Dish;
+   errMess : string;
 
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
@@ -85,7 +86,8 @@ color: ThemePalette;
        });
 
       this.feedbackForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+      .subscribe(data => this.onValueChanged(data), errmess => this.errMess = <any>errmess);
+     
 
       this.onValueChanged(); // (re)set validation messages now
     }
@@ -103,7 +105,7 @@ color: ThemePalette;
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    this.dishservice.getDish(id).subscribe((dish) => this.dish = dish);
+    this.dishservice.getDish(id).subscribe((dish) => this.dish = dish,  errmess => this.errMess = <any>errmess);
   }
 
   goBack(): void {
