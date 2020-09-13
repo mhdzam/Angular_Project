@@ -15,7 +15,7 @@
             <h3>{{dish.name | uppercase}}</h3>
           </mat-card-title>
         </mat-card-header>
-        <img mat-card-image src={{dish.image}} alt={{dish.name}}>
+        <img mat-card-image src="{{ baseURL + dish.image }}" alt={{dish.name}}>
         <mat-card-content>
           <p>{{dish.description}}
           </p>
@@ -41,23 +41,34 @@
         <p matLine> -- {{commentitem.author}} {{commentitem.date | date}}</p>
       </mat-list-item>
 
+      <mat-list-item *ngIf='feedbackForm.valid'>
+        <p matLine> {{feedbackForm.value.author}} </p>
+        <p matLine>
+          <span> {{feedbackForm.value.rating>1 ? feedbackForm.value.rating + " Stars" : feedbackForm.value.rating + " Star"}} </span>
+        </p>
+        <p matLine> {{feedbackForm.value.comment}}</p>
+      </mat-list-item>
+
+
       <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
         
           <mat-form-field class="full-width">
             <input matInput formControlName="author" placeholder="Name" type="text" required>
-            <mat-error *ngIf="feedbackForm.get('author').hasError('required') && feedbackForm.get('author').touched">author name is required</mat-error>
+            <mat-error *ngIf="formErrors.author">{{formErrors.author}}</mat-error>
           </mat-form-field>
 
-         
-          <mat-slider
+          <mat-slider class="cdk-focused"
   thumbLabel
+  formControlName="rating"
   [displayWith]="formatLabel"
   tickInterval="1"
   min="1"
+  value = "5"
   max="5"></mat-slider>
 
   <mat-form-field class="full-width">
     <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+    <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
   </mat-form-field>
         
       

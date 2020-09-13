@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Dish } from '../shared/dish';
+import { Component, OnInit, Inject } from '@angular/core';
 import { DISHES } from '../shared/dishes';
 import { DishService } from '../services/dish.service';
 
@@ -16,29 +15,14 @@ export class MenuComponent implements OnInit {
 
   dishes = DISHES;
 
-  selectedDish :Dish;
 
+
+  constructor(private dishService : DishService,
+    @Inject('baseURL') private baseURL){
+
+  }
 
   ngOnInit() {
     this.dishService.getDishes().subscribe((dishes) => this.dishes = dishes);
   }
-  
-
-  constructor(private dishService : DishService){
-
-  }
-
-  onSelect(dish: Dish)
-  {
-    console.log('test on select event');
-    this.selectedDish = dish;
-  }
-
-  getDish(id: string): Dish {
-    return DISHES.filter((dish) => (dish.id === id))[0];
-  }
-
-  getFeaturedDish(): Dish {
-    return DISHES.filter((dish) => dish.featured)[0];
-  }   
   }

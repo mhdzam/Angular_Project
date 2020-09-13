@@ -53,6 +53,7 @@ export class ContactComponent implements OnInit {
   }
 
   onValueChanged(data?: any) {
+    console.log('valid on value changed !!');
     if (!this.feedbackForm) { return; }
     const form = this.feedbackForm;
     for (const field in this.formErrors) {
@@ -60,7 +61,10 @@ export class ContactComponent implements OnInit {
         // clear previous error message (if any)
         this.formErrors[field] = '';
         const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
+        console.log(control.dirty);
+        console.log(control.valid);
+        if (true /* && control.dirty && !control.valid*/) {
+          console.log(' passed !!');
           const messages = this.validationMessages[field];
           for (const key in control.errors) {
             if (control.errors.hasOwnProperty(key)) {
@@ -71,7 +75,7 @@ export class ContactComponent implements OnInit {
       }
     }
   }
-  
+
 
   createForm() {
     this.feedbackForm = this.fb.group({

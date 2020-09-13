@@ -40,3 +40,22 @@ $divider-color:        #BDBDBD;
 .flex-spacer {
   flex: 1 1 auto;
 }
+
+
+.mat-slider-thumb-label {
+
+  background-color:yellow !important;
+}
+
+.mat-slider-thumb {
+  background-color:yellow !important;
+}
+
+.mat-slider-thumb-label-text {
+  opacity: 1 !important;
+  color: black !important;
+}
+
+.mat-slider-track-fill {
+  background-color: yellow !important;
+}
