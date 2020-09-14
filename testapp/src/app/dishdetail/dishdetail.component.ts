@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentContent } from '../shared/CommentContent';
 import { ThemePalette } from '@angular/material';
 import { Comment } from '../shared/comment';
+import { switchMap } from 'rxjs/operators';
 
 
 
@@ -24,7 +25,12 @@ export class DishdetailComponent implements OnInit {
 color: ThemePalette;
   
   dish: Dish;
-   errMess : string;
+  errMess : string;
+  dishcopy: Dish;
+  dishIds: string[];
+  prev: string;
+  next: string;
+  newcomment : Comment;
 
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
@@ -94,18 +100,43 @@ color: ThemePalette;
 
     
     onSubmit() {
+
+      
+   
+
       this.commentcontent = this.feedbackForm.value;
       console.log(this.commentcontent);
-      var newcomment = this.commentcontent;
-      newcomment.date = Date.now().toString();
-      this.dish.comments.push(newcomment);
+       this.newcomment = this.commentcontent;
+      this.newcomment.date = Date.now().toString();
+
+      this.dishcopy.comments.push(this.newcomment);
+      console.log(this.newcomment.comment);
+      console.log(this.newcomment.date);
+      console.log(this.newcomment.rating);
+      console.log(this.newcomment.author);
+      this.dishservice.putDish(this.dishcopy)
+        .subscribe(dish => {
+          this.dish = dish; this.dishcopy = dish;
+        },
+        errmess => { this.dish = null; this.dishcopy = null; this.errMess = <any>errmess; });
+
+        
+      this.dish.comments.push(this.newcomment);
       this.feedbackForm.reset(this.createForm());
       this.feedbackFormDirective.resetForm();
     }
 
-  ngOnInit() {
-    const id = this.route.snapshot.params['id'];
-    this.dishservice.getDish(id).subscribe((dish) => this.dish = dish,  errmess => this.errMess = <any>errmess);
+
+    setPrevNext(dishId: string) {
+      const index = this.dishIds.indexOf(dishId);
+      this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
+      this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
+    }
+
+   ngOnInit() {
+    this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
+    this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
+    .subscribe(dish => { this.dish = dish;this.dish = dish; this.dishcopy = dish;  this.setPrevNext(dish.id); });
   }
 
   goBack(): void {
