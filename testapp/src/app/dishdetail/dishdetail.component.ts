@@ -8,7 +8,9 @@ import { CommentContent } from '../shared/CommentContent';
 import { ThemePalette } from '@angular/material';
 import { Comment } from '../shared/comment';
 import { switchMap } from 'rxjs/operators';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { visibility } from '../animations/app.animation';
+import { flyInOut , expand} from '../animations/app.animation';
+
 
 
 
@@ -16,19 +18,16 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
   styleUrls: ['./dishdetail.component.scss'],
-  animations: [
-    trigger('visibility', [
-        state('shown', style({
-            transform: 'scale(1.0)',
-            opacity: 1
-        })),
-        state('hidden', style({
-            transform: 'scale(0.5)',
-            opacity: 0
-        })),
-        transition('* => *', animate('0.5s ease-in-out'))
-    ])
-  ]
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+    },
+    animations: [
+      flyInOut(),
+      visibility(),
+      expand()
+    ]
 })
 export class DishdetailComponent implements OnInit {
   @ViewChild('fform') feedbackFormDirective;
