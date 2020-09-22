@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
 import { visibility } from '../animations/app.animation';
 
+import {FeedbackService} from '../services/feedback.service';
+import { flyInOut, expand } from '../animations/app.animation';
+
 
 
 
@@ -12,14 +15,18 @@ import { visibility } from '../animations/app.animation';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
   animations: [
-    visibility()
+    visibility(),
+    expand()
   ]
 })
 export class ContactComponent implements OnInit {
   @ViewChild('fform') feedbackFormDirective;
   feedbackForm: FormGroup;
+  copyfeedback : Feedback;
   feedback: Feedback;
+  errMess : string;
   contactType = ContactType;
+  issendingdata = false;
 
   formErrors = {
     'firstname': '',
@@ -51,7 +58,7 @@ export class ContactComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private feedbackservice : FeedbackService) {
     this.createForm();
   }
 
@@ -102,6 +109,7 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
+    this.issendingdata = true;
     this.feedback = this.feedbackForm.value;
     console.log(this.feedback);
     this.feedbackForm.reset({
@@ -113,7 +121,23 @@ export class ContactComponent implements OnInit {
       contacttype: 'None',
       message: ''
     });
+    this.feedbackservice.submitFeedback(this.feedback).subscribe(fb => 
+      {
+        this.feedback = fb;
+        this.copyfeedback = fb;
+        this.issendingdata = false;
+      },
+      errmess => {this.feedback = null;this.copyfeedback=null;this.issendingdata=false;this.errMess = <any>errmess;}
+      );
+
+      this.copyfeedback = this.feedbackForm.value;
+
     this.feedbackFormDirective.resetForm();
+
+    var that = this;
+    setTimeout(function() {
+      that.copyfeedback =null;
+  }, 5000);
   }
 
 

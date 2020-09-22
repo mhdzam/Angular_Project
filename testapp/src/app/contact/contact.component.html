@@ -35,7 +35,7 @@
       </div>
     </div>
   </div>
-  <div fxFlex fxFlexOffset="20px" class="form-size">
+  <div fxFlex fxFlexOffset="20px" class="form-size" *ngIf = "!issendingdata && !errMess && !copyfeedback" [@expand]>
     <h3>Send us your Feedback</h3>
     <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
 
@@ -81,4 +81,35 @@
       [disabled]="feedbackForm.invalid" type="submit" mat-button class="background-primary text-floral-white">Submit</button>
     </form>
   </div>
+
+
+<div *ngIf="copyfeedback && !errMess && !issendingdata" [@expand]>
+  <h3>your submission</h3>
+
+  <p>First Name: {{copyfeedback.firstname}}</p>
+
+  <p>Last Name: {{copyfeedback.lastname}}</p>
+
+  <p>Tel. Num: {{copyfeedback.telnum}}</p>
+
+  <p>Email: {{copyfeedback.email}}</p>
+
+  <p>Contact Yoy? {{copyfeedback.agree}}</p>
+
+  <p>How? {{copyfeedback.contacttype}}</p>
+
+<p>feedback? {{copyfeedback.message}}</p>
+</div>
+
+
+  
+  <div [hidden]="!issendingdata || errMess">
+    <mat-spinner></mat-spinner><h4>Submitting . . . Please Wait</h4>
+  </div>
+
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+
 </div>

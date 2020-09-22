@@ -224,5 +224,86 @@
       "description": "Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. He says, Put together the cuisines from the two craziest cultures, and you get a winning hit! Amma Mia!"
     }
   ],
-  "feedback": []
+  "feedback": [
+    {
+      "firstname": "mohammed",
+      "lastname": "alzamil",
+      "telnum": "0505838490",
+      "email": "intell_progr_1991@hotmail.com",
+      "agree": true,
+      "contacttype": "Tel",
+      "message": "you have a very nice restaurant ! ",
+      "id": 1
+    },
+    {
+      "firstname": "mhd",
+      "lastname": "zamil",
+      "telnum": "0988072618",
+      "email": "intell_progr_1991@hotmail.com",
+      "agree": true,
+      "contacttype": "Email",
+      "message": "hi from client side !",
+      "id": 2
+    },
+    {
+      "firstname": "zam",
+      "lastname": "zamzam",
+      "telnum": "132465798",
+      "email": "intell_progr_1991@hotmail.com",
+      "agree": true,
+      "contacttype": "Email",
+      "message": "this is my feedback !",
+      "id": 3
+    },
+    {
+      "firstname": "majeed",
+      "lastname": "kameeeel",
+      "telnum": "654321654987",
+      "email": "a@a.com",
+      "agree": true,
+      "contacttype": "Email",
+      "message": "fake feedback!",
+      "id": 4
+    },
+    {
+      "firstname": "lujain",
+      "lastname": "ismail",
+      "telnum": "05058384958",
+      "email": "lolo@gmail.com",
+      "agree": true,
+      "contacttype": "Tel",
+      "message": "please call me later !",
+      "id": 5
+    },
+    {
+      "firstname": "zamzam",
+      "lastname": "kaka",
+      "telnum": "456654987",
+      "email": "u@y.x",
+      "agree": true,
+      "contacttype": "Tel",
+      "message": "test last one!",
+      "id": 6
+    },
+    {
+      "firstname": "asdads",
+      "lastname": "asdasd",
+      "telnum": "4654654",
+      "email": "a@a.com",
+      "agree": true,
+      "contacttype": "Tel",
+      "message": "sdf45sdf5s4\nf",
+      "id": 7
+    },
+    {
+      "firstname": "asd",
+      "lastname": "asdasd",
+      "telnum": "465464654",
+      "email": "a@a.com",
+      "agree": true,
+      "contacttype": "Tel",
+      "message": "asd4sa5d4sa65d4",
+      "id": 8
+    }
+  ]
 }
